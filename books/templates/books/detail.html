@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class = "row">
+  <div class = "col-2">
+    <img src="{{ book.icon.url }}" class="img-fluid" />
+  </div>
+
+  <div class = "col-10">
+    <a href = "{{ book.url }}" ><h1>{{ book.title }}</h1></a>
+  </div>
+</div>
+
+
+<div class = "row">
+  <div class = "col-8 ">
+    <img src="{{ book.image.url }}" class="img-fluid" />
+  </div>
+
+  <div class = "col-4">
+    <a href="javascript:{document.getElementById('buy').submit()}"><button class="btn btn-primary btn-lg btn-block">Buy {{ book.votes_total }}</button></a>
+  </div>
+</div>
+
+
+<div class = "row">
+  <div class = "col-4">
+    <h4>Hunted by {{ book.hunter.username }}</h4>
+  </div>
+
+  <div class = "col-4 text-right">
+    <h4>{{ book.pub_date_short }}</h4>
+  </div>
+</div>
+
+<div class = "row">
+  <div class = "col-4">
+    <p>{{ book.body }}</p>
+  </div>
+</div>
+
+<form id = 'buy' method = "POST" action = "{% url 'buy' book.id %}">
+  {% csrf_token %}
+  <input type="hidden">
+</form>
+
+
+
+
+  {% endblock %}
